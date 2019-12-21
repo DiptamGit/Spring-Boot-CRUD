@@ -15,7 +15,9 @@ public class ActorService {
     @Autowired
     private final ActorRepository actorRepository;
 
-    public List<Actor> findAll(){
-        return actorRepository.findAll();
+    public List<Actor> findAll(){ return actorRepository.findAll(); }
+
+    public List<Actor> findByFirstAndLastName(String fName, String lName){
+        return actorRepository.findByFirstNameAndLastName(fName, lName);
     }
 }
