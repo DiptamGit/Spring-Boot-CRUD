@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ActorRepository extends JpaRepository<Actor, Long> {
 
-    @Query("select * from sakila.actor a where a.first_name = ?1 and a.last_name = ?2")
+    @Query(value = "select * from sakila.actor a where a.first_name = :fname and a.last_name = :lname", nativeQuery = true)
     public List<Actor> findByFirstNameAndLastName(String fname, String lname);
 }
