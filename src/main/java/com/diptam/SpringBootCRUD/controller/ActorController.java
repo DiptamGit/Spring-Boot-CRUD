@@ -7,12 +7,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/actors")
@@ -28,9 +26,15 @@ public class ActorController {
         return ResponseEntity.ok(actorService.findAll());
     }
 
-    @GetMapping
-    public ResponseEntity<List<Actor>> findByFirstAndLastName(@RequestParam("firstName") String fname, @RequestParam("lastName") String lname){
-        log.debug("Request : "+fname+" : "+lname);
-        return ResponseEntity.ok(actorService.findByFirstAndLastName(fname, lname));
+    @GetMapping("/byName")
+    public ResponseEntity<List<Actor>> findByFirstAndLastName(@RequestParam("firstName") String fname,
+                                                              @RequestParam( required = false, value = "lastName") Optional<String> lname){
+        log.info("Request : "+fname+" : "+lname);
+        if (lname.isPresent()){
+            return ResponseEntity.ok(actorService.findByFirstAndLastName(fname, lname.toString()));
+        }else {
+            return ResponseEntity.ok(actorService.findByFirstName(fname));
+        }
+
     }
 }

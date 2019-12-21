@@ -10,4 +10,7 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
 
     @Query(value = "select * from sakila.actor a where a.first_name = :fname and a.last_name = :lname", nativeQuery = true)
     public List<Actor> findByFirstNameAndLastName(String fname, String lname);
+
+    @Query(value = "select * from sakila.actor a where a.first_name = :fname", nativeQuery = true)
+    public List<Actor> findByFirstName(String fname);
 }

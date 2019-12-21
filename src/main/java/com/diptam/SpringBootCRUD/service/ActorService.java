@@ -20,4 +20,8 @@ public class ActorService {
     public List<Actor> findByFirstAndLastName(String fName, String lName){
         return actorRepository.findByFirstNameAndLastName(fName, lName);
     }
+
+    public List<Actor> findByFirstName(String fname) {
+        return actorRepository.findByFirstName(fname);
+    }
 }
