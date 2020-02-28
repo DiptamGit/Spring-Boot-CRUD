@@ -14,5 +14,4 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
     @Query(value = "select * from sakila.actor a where a.first_name = :fname", nativeQuery = true)
     public List<Actor> findByFirstName(String fname);
 
-    public List<ActorInfo> findInfoByActorId();
 }
